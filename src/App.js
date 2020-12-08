@@ -1,7 +1,7 @@
 import React, {Component} from 'react'
-import {Switch, Route} from 'react-router-dom'
-import Login from "./pages/login/login";
-import Admin from "./pages/admin/admin";
+import { Switch, Route } from 'react-router-dom'
+import Login from "./containers/login/login";
+import Admin from "./containers/admin/admin";
 import './App.less';
 
 export default class App extends Component{
