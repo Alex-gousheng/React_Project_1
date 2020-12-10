@@ -2,11 +2,19 @@ import React, {Component} from 'react'
 import { Form, Input, Button, message} from "antd";
 import { UserOutlined, LockOutlined } from '@ant-design/icons'
 import {connect} from 'react-redux'
+import {Redirect} from 'react-router-dom'
 import {createSaveUserInfoAction} from '../../redux/action_creators/login_action'
 import {reqLogin} from "../../api/index";
 import './css/login.less'
-import logo from './images/logo.png'
+import logo from '../../static/imgs/logo.png'
 
+
+@connect(
+    state =>({isLogin:state.userInfo.isLogin}),
+    {
+        saveUserInfo:createSaveUserInfoAction,
+    }
+)
 class Login extends Component{
     render(){
         const onFinish = async(values, err)=>{
@@ -27,7 +35,12 @@ class Login extends Component{
                 message.error("表单填写错误")
             }
         };
-
+        const {isLogin} = this.props
+        if (isLogin){
+            return (
+                <Redirect to='/admin/home'/>
+            )
+        }
         return (
             <div className="login">
                 <header>
@@ -68,11 +81,11 @@ class Login extends Component{
         )
     }
 }
+export default Login
 
-
-export default connect(
-    state =>({}),
-    {
-        saveUserInfo:createSaveUserInfoAction,
-    }
-)(Login)
+// export default connect(
+//     state =>({isLogin:state.userInfo.isLogin}),
+//     {
+//         saveUserInfo:createSaveUserInfoAction,
+//     }
+// )(Login)
