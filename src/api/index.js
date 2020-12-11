@@ -9,3 +9,6 @@ export const reqCategoryList = ()=>myAxios.get(`${BASE_URL}/manage/category/list
 
 //获取天气信息
 // export const reqWeatherInfo = ()=>myAxios.get(`http://api.map.baidu.com/telematics/v3/weather?location=${city}&output=json&ak=3p49MVra6urFRGOT9s8UBWr2`)
+
+export const reqAddCategory = ({categoryName})=>myAxios.post(`${BASE_URL}/manage/category/add`,{categoryName})
+export const reqUpdateCategory = ({categoryId,categoryName})=>myAxios.post(`${BASE_URL}/manage/category/update`,{categoryId,categoryName})

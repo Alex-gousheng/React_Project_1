@@ -38,7 +38,7 @@ class Login extends Component{
         const {isLogin} = this.props
         if (isLogin){
             return (
-                <Redirect to='/admin/home'/>
+                <Redirect to='/admin'/>
             )
         }
         return (
