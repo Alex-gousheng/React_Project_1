@@ -1,4 +1,6 @@
 import {SAVE_TITLE} from '../action_types'
+
+
 let initState = ''
 export default function menuReducer(preState=initState,action) {
     const {type,data} = action

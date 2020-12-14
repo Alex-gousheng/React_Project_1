@@ -1,6 +1,6 @@
-import {SAVE_PROD_LIST} from "../action_types";
+import {SAVE_CATEGORY_LIST} from "../action_types";
 
 
-export const createSaveProductAction = (value)=>{
-    return {type:SAVE_PROD_LIST,data:value}
+export const createSaveCategoryAction = (value)=>{
+    return {type:SAVE_CATEGORY_LIST,data:value}
 }

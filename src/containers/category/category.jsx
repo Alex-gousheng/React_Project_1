@@ -2,10 +2,15 @@
 import React, {Component } from 'react'
 import { Card , Button , Table , message , Modal, Form, Input} from 'antd';
 import {PlusCircleOutlined} from '@ant-design/icons'
+import {connect} from "react-redux";
 import {reqCategoryList, reqAddCategory,reqUpdateCategory} from '../../api/index'
 import {PAGE_SIZE} from "../../config";
+import {createSaveCategoryAction} from "../../redux/action_creators/category_action";
 
-
+@connect(
+    state=>({}),
+    {saveCategory:createSaveCategoryAction}
+)
 class Category extends Component {
 // 为Form建立引用
     form = React.createRef();
@@ -69,12 +74,10 @@ class Category extends Component {
         let result = await reqCategoryList()
         this.setState({isLoading:false})
         let {status,data,msg} = result
-        data = data.map((item)=>{
-            item.key = item._id;
-            return item
-        })
         if (status === 0){
             this.setState({categoryList:data.reverse()})
+            this.props.saveCategory(data)
+
         }else message.error(msg,1)
     }
     showAdd = ()=>{

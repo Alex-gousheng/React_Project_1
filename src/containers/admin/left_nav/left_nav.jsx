@@ -4,7 +4,7 @@ import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {createSaveTitleAction} from "../../../redux/action_creators/menu_action";
 import menuList from "../../../config/menu-config";
-import logo from '../../../static/imgs/logo.png'
+import logo from '../../../static/images/logo.png'
 import './left_nav.less'
 
 const { SubMenu } = Menu;
@@ -50,6 +50,7 @@ class LeftNav extends Component{
     }
 
     render(){
+        let {pathname} = this.props.location
         return (
             <div>
                 <header className="nav-header">
@@ -57,8 +58,8 @@ class LeftNav extends Component{
                     <h1>商品管理系统</h1>
                 </header>
                 <Menu
-                    selectedKeys={this.props.location.pathname.split('/').reverse()[0]}
-                    defaultOpenKeys={this.props.location.pathname.split('/').splice(2)}
+                    selectedKeys={pathname.indexOf('product') !== -1 ? 'product':pathname.split('/').reverse()[0]}
+                    defaultOpenKeys={pathname.split('/').splice(2)}
                     mode="inline"
                     theme="dark"
                 >
