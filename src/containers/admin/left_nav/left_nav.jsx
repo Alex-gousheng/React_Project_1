@@ -3,13 +3,16 @@ import { Menu } from 'antd';
 import {Link, withRouter} from "react-router-dom";
 import {connect} from "react-redux";
 import {createSaveTitleAction} from "../../../redux/action_creators/menu_action";
-import menuList from "../../../config/menu-config";
+import menuList from "../../../config/menu_config";
 import logo from '../../../static/images/logo.png'
 import './left_nav.less'
 
 const { SubMenu } = Menu;
 @connect(
-    state=>({}),
+    state=>({
+        menus:state.userInfo.user.role.menus,
+        username:state.userInfo.user.role.username
+    }),
     {
         saveTitle:createSaveTitleAction
     }
@@ -17,34 +20,48 @@ const { SubMenu } = Menu;
 @withRouter
 class LeftNav extends Component{
 
+    hasAuth = (item)=>{
+        const{username,menus} = this.props
+        console.log(this.props.menus)
+        console.log(item)
+        if (username === 'admin')return true
+        else if (!item.children) {
+            return menus.find((item1)=>{return item1 === item.key})
+        }else if(item.children){
+            return item.children.some((item2)=>{return menus.indexOf(item2.key) !==1})
+        }
+    }
+
 
     createMenu = (target)=>{
         return target.map((item)=>{
-            if (!item.children){
-                return (
-                    <Menu.Item key={item.key} onClick={()=>{this.props.saveTitle(item.title)}}>
-                        <Link to={item.path} style={{ textDecoration:'none'}}>
-                            {item.icon}
-                            <span>{item.title}</span>
-                        </Link>
-                    </Menu.Item>
-                )
-            }else {
-                return (
-                    <SubMenu
-                        key={item.key}
-                        title={
-                            <span>
+            if(this.hasAuth(item)){
+                if (!item.children){
+                    return (
+                        <Menu.Item key={item.key} onClick={()=>{this.props.saveTitle(item.title)}}>
+                            <Link to={item.path} style={{ textDecoration:'none'}}>
                                 {item.icon}
                                 <span>{item.title}</span>
+                            </Link>
+                        </Menu.Item>
+                    )
+                }else {
+                    return (
+                        <SubMenu
+                            key={item.key}
+                            title={
+                                <span>
+                                {item.icon}
+                                    <span>{item.title}</span>
                             </span>
-                        }
-                    >
-                        {
-                            this.createMenu(item.children)
-                        }
-                    </SubMenu>
-                )
+                            }
+                        >
+                            {
+                                this.createMenu(item.children)
+                            }
+                        </SubMenu>
+                    )
+                }
             }
         })
     }

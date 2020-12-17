@@ -136,7 +136,7 @@ class Category extends Component {
                     this.state.visible?<Modal
                         title={operType === 'add' ? '新增分类' : '修改分类'}
                         visible={visible}
-                        //删去了form表单自带的submit，在modal的footer自行渲染了一个button，点击后回调onFinish函数
+                        //删去了form表单自带的submit，在modal的footer自行渲染了一个button，点击后回调`onFinish`函数
                         onCancel={()=>{
                             this.setState({visible: false})
                         }}

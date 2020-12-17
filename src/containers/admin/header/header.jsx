@@ -8,7 +8,7 @@ import dayjs from 'dayjs'
 import {connect} from 'react-redux'
 import './css/header.less'
 import {createDeleteSaveUserInfoAction} from "../../../redux/action_creators/login_action";
-import menuList from '../../../config/menu-config'
+import menuList from '../../../config/menu_config'
 
 const { confirm } = Modal;
 

@@ -23,4 +23,19 @@ export const reqSearchProduct = (pageNum,pageSize,searchType, keyword)=>myAxios.
 export const reqProdById = (productId)=>myAxios.get(`${BASE_URL}/manage/product/info`,{params:{productId}})
 //根据图片名称删除图片
 export const reqDeletePicStatus = (name)=>myAxios.post(`${BASE_URL}/manage/img/delete`,{name})
+//请求添加商品
+export const reqAddProduct = (productObj)=>myAxios.post(`${BASE_URL}/manage/product/add`,{...productObj})
+//请求更新商品
+export const reqUpdateProduct = (obj)=>myAxios.post(`${BASE_URL}/manage/product/update`,{...obj})
+//请求所有角色列表
+export const reqRoleList = ()=>myAxios.get(`${BASE_URL}/manage/role/list`)
+//请求添加角色
+export const reqAddRole = ({roleName})=> myAxios.post(`${BASE_URL}/manage/role/add`,{roleName})
+//请求给角色授权export const reqAddRole = ({roleName})=> myAxios.post(`${BASE_URL}/manage/role/add`,{roleName})
+export const reqAuthRole = (roleObj)=> myAxios.post(`${BASE_URL}/manage/role/update`,{...roleObj,auth_time:Date.now()})
+//请求获取所有用户列表（同时携带着角色列表）
+export const reqUserList = ()=> myAxios.get(`${BASE_URL}/manage/user/list`)
+//请求添加用户
+export const reqAddUser = (userObj)=> myAxios.post(`${BASE_URL}/manage/user/add`,{...userObj})
+
 

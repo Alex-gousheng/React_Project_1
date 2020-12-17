@@ -27,6 +27,13 @@ export default class PicturesWall extends Component {
         })
         return result
     }
+    setFileList = (imgArr)=>{
+        let fileList = []
+        imgArr.forEach((item)=>{
+            fileList.push({uid:-item.index, name:item,url:`${BASE_URL}/upload/${item}`})
+        })
+        this.setState({fileList})
+    }
 
     handleCancel = () => this.setState({ previewVisible: false });
 
